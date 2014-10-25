@@ -5,19 +5,23 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link rel="icon" href="../../favicon.ico">
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHu_rbvc8QwcZze4pCS3AuJASFEbefBk8">
+</script>
 	<title>runaway @ HackNC</title>
 </head>
 <body>
+</body>
+<template name="mainLayout">
 	<div class="site-wrapper">
 		<div class="site-wrapper-inner">
 			<div class="cover-container">
 				{{>header}}
-				{{>frontPage}}
+				{{> yield}}
 				{{>footer}}
 			</div>
 		</div>
 	</div>
-</body>
+</template>
 <template name="header">
 <div class="masthead clearfix">
 	<div class="inner">
@@ -28,15 +32,6 @@
 			<li><a href="#">Contact</a></li>
 		</ul>
 	</div>
-</div>
-</template>
-<template name="frontPage">
-<div class="inner cover">
-	<h1 class="cover-heading">Cover your page.</h1>
-	<p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-	<p class="lead">
-	<a href="#" class="btn btn-lg btn-default">Learn more</a>
-	</p>
 </div>
 </template>
 <template name="footer">

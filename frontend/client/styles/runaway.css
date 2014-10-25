@@ -2,3 +2,5 @@
 .red{
 	color: rgb(189, 84, 84);
 }
+
+#map-canvas { width: 400px; height: 400px; margin: 0; padding: 0;}
