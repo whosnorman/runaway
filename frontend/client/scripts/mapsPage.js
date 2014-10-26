@@ -245,7 +245,7 @@ Template.finishEmail.events({
         Meteor.call('api_finishUp', $("#inputName").val(), $("#inputEmail").val(),
             myLat, myLon, Session.get("mylocation"), Session.get("destLocation"),
             Session.get("hours"), Session.get("mins"), Session.get("cost"));
-        window.location = '/thanks';
+        window.location.href = '/thanks';
     }
 });
 
