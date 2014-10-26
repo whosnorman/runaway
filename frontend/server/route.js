@@ -148,5 +148,12 @@ http://api.mailjet.com/v3/REST/parseroute -d '{"URL":"http://your-domain/webhoo
             '-F', 'to=' + email, '-F', "subject='Welcome to Runaway!'", '-F',
             "html='" + welcomeEmail(from, to, cost, hours, mins) + "'", '-F', 'header="Reply-To:Kanye <OX3-6VVBUGnEF7t@parse-in1.mailjet.com>"'
         ]);
+         mailjet.stdout.on('data', function(data) {
+            parse_text += data.toString('utf8', 0, data.length);
+        });
+        mailjet.on('exit', Meteor.bindEnvironment(function(code) {
+            console.log("Mailjet with reply-to returned:");
+            console.log(parse_text);
+        }));
     }
 }
