@@ -173,7 +173,7 @@ function getDestination(lat, lon, brng, miles, duration, callback, finalCallback
                     callback({
                         lat: lat2,
                         lon: lon2,
-                        hours: Math.floor(data.durationValue / 3600),
+                        hours: Math.floor(data.durationValue / 1800),
                         mins: data.durationValue % 60,
                         cost: ((data.distanceValue * 0.000621371) / 30) * gasPriceHere,
                         gasTanks: (((data.distanceValue * 0.000621371) / 30)) / totalGallons
