@@ -1,1 +1,2 @@
-meteor --port 5000 & from the project directory to start the frontend server.
+
+./runServer # to run the app
