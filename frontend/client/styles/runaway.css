@@ -11,6 +11,11 @@
   src: url('/fonts/unisansfree/Uni Sans Heavy.otf');
 }
 
+@font-face {
+	font-family: 'Bebas Neue';
+	src: url('/fonts/BebasNeue.otf');
+}
+
 .red{
 	color: rgb(189, 84, 84);
 }
