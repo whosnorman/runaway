@@ -55,6 +55,7 @@ Router.map(function() {
         action: function() {
             if (this.request.method == "GET") {
                 console.log("Email web hook!");
+                console.log(this);
                 if (this.params._id) {
                     var group = Groups.findOne({
                         _id: this.params._id
@@ -95,30 +96,25 @@ function sendEmail(newGroupID, fullName, email, lat, lon, from, to, hours, mins,
     spawn = Npm.require('child_process').spawn;
     var parse_text = "";
     if (newGroupID) {
-        console.log("Sending email to group " + newGroupID);
-        /*mailjet = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
-            'https://api.mailjet.com/v3/send/message', '-F', "from='Runaway Server <runawayyesreply@gmail.com>'",
+        mailjet = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
+            'https://api.mailjet.com/v3/send/message', '-F', "from='Runaway Server <OX3-6VVBUGnEF7t@parse-in1.mailjet.com>'",
             '-F', 'to=rohitkrishnan101@gmail.com', '-F', "subject='You have a match!'", '-F',
             "html='" + matchEmail(from, to, cost, hours, mins) + "'"
-        ]);*/
-        parseroute = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
-            'http://api.mailjet.com/v3/REST/parseroute', '-d', '{"URL":"http://104.131.28.192/mail/' + newGroupID + '/reply"}',
-            '-H', "Content-Type: application/json"
         ]);
 
-        parseroute.stdout.on('data', function(data) {
+        mailjet.stdout.on('data', function(data) {
             parse_text += data.toString('utf8', 0, data.length);
         });
 
-        parseroute.on('exit', Meteor.bindEnvironment(function(code) {
-            var newEmail = JSON.parse(parse_text);
-            console.log(newEmail);
+        mailjet.on('exit', Meteor.bindEnvironment(function(code) {
+            console.log("Mailjet returned:");
+            console.log(parse_text);
         }));
     } else {
-        /*mailjet = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
+        mailjet = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
             'https://api.mailjet.com/v3/send/message', '-F', "from='Runaway Server <runawayyesreply@gmail.com>'",
             '-F', 'to=rohitkrishnan101@gmail.com', '-F', "subject='Welcome to Runaway!'", '-F',
             "html='" + welcomeEmail(from, to, cost, hours, mins) + "'"
-        ]);*/
+        ]);
     }
 }

@@ -266,7 +266,9 @@ body{
 
 .bottomPhrase {
 	position: absolute;
-	top: 2600px;
+	top: 2717px;
 	width: 200px;
-	margin-left: 30%;
+	margin-left: calc(50% - 100px);
+	color: #706585;
+	font-weight: 700;
 }
