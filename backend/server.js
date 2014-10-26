@@ -94,6 +94,9 @@ var totalRetries = 0;
 var myLocation = [];
 
 function radialPoints(lat, lon, budget, hours, finalCallback) {
+
+
+
     var gasMoneyOneWay = budget * .3; // Dollars remaining
     var totalMiles = (gasMoneyOneWay / (totalGallons * gasPriceHere)) * (mpg * totalGallons);
     locationsArray = [];

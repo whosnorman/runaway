@@ -9,11 +9,12 @@
 
 		<div class="timeline nl-blurred">
 			<div class="title">START</div>
+			<div class="circle1"></div>
 			<div class="line1"></div>
 			<div class="circle"></div>
-			<div class="line2"></div>
+			<div class="line3"></div>
 			<div class="circle"></div>
-			<div class="line2"></div>
+			<div class="line3"></div>
 			<div class="circle"></div>
 			<div class="line2"></div>
 			<div class="circle"></div>
@@ -67,10 +68,23 @@
 			</div>
 		<div class="nl-overlay"></div>
 	</form>
+	</div>
+
+	<div class="kanyeCont">
+		<div class="kanyeImg1"></div>
+		<div class="kanyeImg2"></div>
+		<div class="kanyeImg3"></div>
+		<div class="kanyeImg4"></div>
+
+	</div>
 
 	<div id="submitBtn" class="questionBtn">Runaway</div>
 
-		</div>
+	<div class="bottomPhrase"> 
+		<p>Built with <span class="red glyphicon glyphicon-heart"></span> @ HackNC</p>
+	</div>
+
+		
 
 
 
@@ -89,16 +103,5 @@
 	<script src="scripts/nlform.js"></script>
 	<script>
 		var nlform = new NLForm( document.getElementById( 'nl-form' ) );
-
-		$('#submitBtn').on('click', function(){
-			var days = parseInt($('#days option:selected').text());
-			var budget = parseInt($('#budget').val());
-			var vehicle = $('#vehicle option:selected').text();
-			var people = parseInt($('#people option:selected').text());
-
-			alert(days + ' ' + budget + ' ' + vehicle + ' ' + people);
-		});
-
-
 	</script>
 </template>

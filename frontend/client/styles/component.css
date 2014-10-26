@@ -61,16 +61,20 @@
 .nl-form select  {
 	line-height: inherit;
 	display: inline-block;
-	color: #b14943;
+	color: #706585;
 	cursor: pointer;
-	border-bottom: 1px dashed #b14943;
+	border-bottom: 3px dashed #b14943;
+}
+
+.nl-form select:hover {
+	text-decoration: none;
 }
 
 /* drop-down list / text element */
 .nl-field ul {
 	position: absolute;
 	visibility: hidden;
-	background: #76C3BD;
+	background: #706585;
 	left: -0.5em;
 	top: 50%;
 	font-size: 80%;
@@ -106,7 +110,7 @@
 }
 
 .nl-dd ul li.nl-dd-checked {
-	color: #478982;
+	color: #95a5a4;
 }
 
 .no-touch .nl-dd ul li:hover {
@@ -114,7 +118,7 @@
 }
 
 .no-touch .nl-dd ul li:hover:active {
-	color: #478982;
+	color: #95a5a4;
 }
 
 /* icons for some elements */
@@ -204,7 +208,7 @@ input:focus::-ms-input-placeholder {
 	font-style: italic;
 	font-weight: 400;
 	padding: 0.4em 1em;
-	color: rgba(0,0,0,0.2);
+	color: #fff;
 	border-top: 1px dashed rgba(255,255,255,0.7);
 }
 
