@@ -85,9 +85,11 @@ Template.mapsPage.rendered = function() {
     directionsDisplay.setMap(map);
     console.log("Map is loaded!");
 
-    var frontBud = Session.get('frontBudget');
-    var frontHours = parseInt(Session.get('frontDays')) * 10;
-    var people = Session.get('frontPeople');
+    var frontBud = Session.get('frontBudget') || 100;
+
+    var frontHours = parseInt(Session.get('frontDays') || 2) * 10;
+
+    var people = Session.get('frontPeople') || 1;
 
     console.log(frontBud);
     console.log(100);
@@ -104,6 +106,7 @@ Template.mapsPage.rendered = function() {
         Session.set("results", result);
         Session.set("hours", result.points[0].hours);
         Session.set("mins", result.points[0].mins);
+        Session.set("gasTanks", result.points[0].gasTanks);
         if (people > 0) {
             var total = result.points[0].cost;
             var per = Math.round(total * 100 / (people + 1)) / 100;
@@ -162,6 +165,9 @@ Template.itinerary.helpers({
     cost: function() {
         return Session.get("cost");
     },
+    gasTanks: function(){
+        return Math.round(Session.get("gasTanks") * 100) / 100;
+    },
     itNumber: function() {
         return Session.get("itNumber");
     }
@@ -178,6 +184,21 @@ Template.itinerary.events({
         Session.set("hours", result.points[num].hours);
         Session.set("mins", result.points[num].mins);
         Session.set("cost", result.points[num].cost);
+        Session.set("gasTanks", result.points[num].gasTanks);
+        var people = Session.get('frontPeople') || 1;
+        
+        if (people > 0) {
+            var total = result.points[num].cost;
+            var per = Math.round(total * 100 / (people + 1)) / 100;
+            console.log(per);
+            var string = per.toString() + '/per person';
+            console.log("!!!!!!!!!!!!!!!!1");
+            console.log(string);
+            Session.set("cost", string);
+        } else {
+            Session.set("cost", result.points[num].cost);
+        }
+
         // To add the marker to the map, use the 'map' property
         $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + myLat + "," + myLon + '&sensor=false', null, function(data) {
             Session.set("mylocation", data.results[0].formatted_address);
