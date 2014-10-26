@@ -7,7 +7,7 @@
 	<div class="inner cover">
 		<h1 class="cover-heading"> </h1>
 
-		<div class="timeline">
+		<div class="timeline nl-blurred">
 			<div class="title">START</div>
 			<div class="line1"></div>
 			<div class="circle"></div>
@@ -20,30 +20,63 @@
 
 		</div>
 
+
 		<div class="contOfQuestions">
+			<form id="nl-form" class="nl-form">
 			<div class="questionCont">
-				<p> I want to go on a 3 day trip</p>
+				<p> I want to go <br />on a 
+					<select id="days">
+						<option value="1" selected>1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+					</select>
+			 	day trip</p>
 			</div>
 
 			<div class="questionCont">
-				<p> With a budget of $100.00</p>
+				<p> With a budget <br /> of $
+					<input id="budget" type="text" value="" placeholder="100.00" data-subline="Includes gas, food, & tourism"/>
+				</p>
 			</div>
 
 			<div class="questionCont">
-				<p> I will be driving a Sedan </p>
+				<p> I will be driving <br />a 
+					<select id="vehicle">
+						<option value="1" selected>SUV</option>
+						<option value="2">Sedan</option>
+						<option value="3">Minivan</option>
+						<option value="4">RV</option>
+					</select>
+			 </p>
 			</div>
 
 			<div class="questionCont">
-				<p>and will be travelling with 3 people.</p>
+				<p>Plan to travel<br /> with
+					<select id="people">
+						<option value="1">0</option>
+						<option value="2" selected>1</option>
+						<option value="3">2</option>
+						<option value="4">3</option>
+						<option value="5">4</option>
+					</select>
+					 other people.</p>
 			</div>
+		<div class="nl-overlay"></div>
+	</form>
+
+	<div id="submitBtn" class="questionBtn">Runaway</div>
+
 		</div>
 
 
 
+
+
 	<!-- Personal information: email, age, name
-
-
-
 
 
 	<p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
@@ -52,4 +85,20 @@
 	<a href="#" class="btn btn-lg btn-default">Learn more</a>
 	</p> -->
 	</div>
+
+	<script src="scripts/nlform.js"></script>
+	<script>
+		var nlform = new NLForm( document.getElementById( 'nl-form' ) );
+
+		$('#submitBtn').on('click', function(){
+			var days = parseInt($('#days option:selected').text());
+			var budget = parseInt($('#budget').val());
+			var vehicle = $('#vehicle option:selected').text();
+			var people = parseInt($('#people option:selected').text());
+
+			alert(days + ' ' + budget + ' ' + vehicle + ' ' + people);
+		});
+
+
+	</script>
 </template>

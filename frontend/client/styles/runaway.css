@@ -27,19 +27,20 @@
 	font-size: 60px;
 	color: #303030;
 	margin-bottom: 1.5em;
-  	-webkit-box-shadow: 0 0 100px rgba(0,0,0,.5);
+	border-bottom: #bebebe 5px solid;
 }
 
 .questionBtn {
 	font-weight: 100;
+	width: 350px;
 	text-align: center;
-	background-color: #696969;
-	font-size: 25px;
-	color: #fff;
-	margin-left: 80%;
-	margin-bottom: 0;
+	background-color: #fff;
+	font-size: 60px;
+	color: #303030;
+	margin-left: 25%;
+	margin-bottom: 100px;
 	border-radius: 7px;
-	border-bottom: #303030 2px solid;
+	border-bottom: #bebebe 2px solid;
 }
 
 .questionBtn:hover {
@@ -67,14 +68,12 @@
 	width: 2px;
 	height: 400px;
 	margin-top: 50px;
-  	-webkit-box-shadow: 0 0 50px rgba(0,0,0,.5);
 }
 
 .line2 {
 	background-color: #fff;
 	width: 2px;
 	height: 350px;
-  	-webkit-box-shadow: 0 0 50px rgba(0,0,0,.5);
 }
 
 .circle1 {
@@ -104,7 +103,7 @@
 }
 
 .title {
-	color: #fff;
+	color: rgba(255, 255, 255, 0.6);
 	font-size: 20px;
 	margin-left: -29px;
 	font-weight: 700;
