@@ -1,4 +1,16 @@
 /* CSS declarations go here */
+
+@font-face {
+  font-family: 'Uni Sans';
+  font-weight: 100;
+  src: url('/fonts/unisansfree/Uni Sans Thin.otf');
+}
+@font-face {
+  font-family: 'Uni Sans';
+  font-weight: 700;
+  src: url('/fonts/unisansfree/Uni Sans Heavy.otf');
+}
+
 .red{
 	color: rgb(189, 84, 84);
 }
@@ -93,4 +105,97 @@ body{
 
 .finishUpGroup div{
 	margin-top:10px;
+}
+
+.questionCont {
+	font-weight: 700;
+	width: 12em;
+	background-color: #fff;
+	padding: 1em;
+	border-radius: 15px;
+	font-size: 60px;
+	color: #303030;
+	margin-bottom: 1.5em;
+	border-bottom: #bebebe 5px solid;
+}
+
+.questionBtn {
+	font-weight: 100;
+	width: 350px;
+	text-align: center;
+	background-color: #fff;
+	font-size: 60px;
+	color: #303030;
+	margin-left: 25%;
+	margin-bottom: 100px;
+	border-radius: 7px;
+	border-bottom: #bebebe 2px solid;
+}
+
+.questionBtn:hover {
+	cursor: pointer;
+}
+
+.topPart {
+	font-weight: 700;
+	padding: 20vw;
+	background-color: #333;
+  	-webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+  	box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+  	width: 100%;
+
+}
+
+.timeline {
+	float: left;
+	margin-left: 20%;
+	margin-right: 5%;
+}
+
+.line1 {
+	background-color: #fff;
+	width: 2px;
+	height: 400px;
+	margin-top: 50px;
+}
+
+.line2 {
+	background-color: #fff;
+	width: 2px;
+	height: 350px;
+}
+
+.circle1 {
+	background-color: #fff;
+	width: 15px;
+	height: 15px;
+	margin-left: -7px;
+	margin-bottom: -52px;
+	border-radius: 15px;
+}
+
+.circle {
+	background-color: #fff;
+	width: 15px;
+	height: 15px;
+	margin-left: -7px;
+	margin-top: -2px;
+	border-radius: 15px;
+}
+
+
+.contOfQuestions {
+	float: right;
+	margin-right: 24%;
+	width: 700px;
+	margin-top: -70px;
+}
+
+.title {
+	color: rgba(255, 255, 255, 0.6);
+	font-size: 20px;
+	margin-left: -29px;
+	font-weight: 700;
+	width: 70px;
+	margin-bottom: -15px;
 }
