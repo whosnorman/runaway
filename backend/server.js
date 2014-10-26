@@ -176,6 +176,7 @@ function getDestination(lat, lon, brng, miles, duration, callback, finalCallback
                         hours: Math.floor(data.durationValue / 3600),
                         mins: data.durationValue % 60,
                         cost: ((data.distanceValue * 0.000621371) / 30) * gasPriceHere,
+                        gasTanks: (((data.distanceValue * 0.000621371) / 30)) / totalGallons
                     }, lat, lon, toDeg(brng), dist * 6371 / 1.60934, duration, finalCallback);
                 }
             } else {
