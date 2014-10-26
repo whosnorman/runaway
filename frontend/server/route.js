@@ -131,7 +131,7 @@ http://api.mailjet.com/v3/REST/parseroute -d '{"URL":"http://your-domain/webhoo
     var parse_text = "";
     if (newGroupID) {
         mailjet = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
-            'https://api.mailjet.com/v3/send/message', '-F', "from='Runaway Server <OX3-6VVBUGnEF7t@parse-in1.mailjet.com>'",
+            'https://api.mailjet.com/v3/send/message', '-F', "from='Runaway Server <runawayyesreply@gmail.com>'",
             '-F', 'to=' + email, '-F', "subject='You have a match!'", '-F',
             "html='" + matchEmail(from, to, cost, hours, mins) + "'"
         ]);
@@ -146,7 +146,7 @@ http://api.mailjet.com/v3/REST/parseroute -d '{"URL":"http://your-domain/webhoo
         mailjet = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
             'https://api.mailjet.com/v3/send/message', '-F', "from='Runaway Server <runawayyesreply@gmail.com>'",
             '-F', 'to=' + email, '-F', "subject='Welcome to Runaway!'", '-F',
-            "html='" + welcomeEmail(from, to, cost, hours, mins) + "'"
+            "html='" + welcomeEmail(from, to, cost, hours, mins) + "'", '-F', 'header="Reply-To:Kanye <OX3-6VVBUGnEF7t@parse-in1.mailjet.com>"'
         ]);
     }
 }
