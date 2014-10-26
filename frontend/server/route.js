@@ -23,7 +23,27 @@ function welcomeEmail(from, to, cost, hours, mins) {
 };
 
 function matchEmail(from, to, cost, hours, mins) {
-    return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' + '<html xmlns="http://www.w3.org/1999/xhtml">' + '<head> ' + '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' + '<meta name="viewport" content="width=device-width, initial-scale=1.0"/>' + '<title>Runaway</title>' + '<style type="text/css">' + '</style>' + '</head>' + '<body>' + '<h1>Runaway</h1>' + '<h2>Thanks for using Runaway, below is your itenerary:</h2>' + '<p><b>From:</b>' + from + '</p>' + '<p><b>To:</b>' + to + '</p>' + '<p><b>Total Cost:</b>' + cost + '</p>' + '<p><b>Time:</b>' + hours + 'h' + mins + 'm</p>' + '</body>' + '</html>'
+    return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' 
+    + '<html xmlns="http://www.w3.org/1999/xhtml">' 
+    + '<head> ' 
+    + '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' 
+    + '<meta name="viewport" content="width=device-width, initial-scale=1.0"/>' 
+    + '<title>Runaway</title>' 
+    + '<style type="text/css">' 
+    + '.card{ border-radius:10px; background-color: white; padding: 10px; }'
+    + '</style>' 
+    + '</head>' 
+    + '<body>'
+    + '<h1>Runaway</h1>' 
+    + '<h2>Thanks for using Runaway, below is your itenerary:</h2>' 
+    + '<div class="card">'
+    + '<p><b>From:</b>' + from + '</p>' 
+    + '<p><b>To:</b>' + to + '</p>' 
+    + '<p><b>Total Cost:</b>' + cost + '</p>' 
+    + '<p><b>Time:</b>' + hours + 'h' + mins + 'm</p>' 
+    + '</div>'
+    + '</body>' 
+    + '</html>'
 };
 Meteor.methods({
     api_postRoute: function(lat, lon, budget, hours) {
@@ -111,8 +131,8 @@ http://api.mailjet.com/v3/REST/parseroute -d '{"URL":"http://your-domain/webhoo
     var parse_text = "";
     if (newGroupID) {
         mailjet = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
-            'https://api.mailjet.com/v3/send/message', '-F', "from='Runaway Server <OX3-6VVBUGnEF7t@parse-in1.mailjet.com>'",
-            '-F', 'to=rohitkrishnan101@gmail.com', '-F', "subject='You have a match!'", '-F',
+            'https://api.mailjet.com/v3/send/message', '-F', "from='Runaway Server <runawayyesreply@gmail.com>'",
+            '-F', 'to=' + email, '-F', "subject='You have a match!'", '-F',
             "html='" + matchEmail(from, to, cost, hours, mins) + "'"
         ]);
         mailjet.stdout.on('data', function(data) {
@@ -125,8 +145,8 @@ http://api.mailjet.com/v3/REST/parseroute -d '{"URL":"http://your-domain/webhoo
     } else {
         mailjet = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
             'https://api.mailjet.com/v3/send/message', '-F', "from='Runaway Server <runawayyesreply@gmail.com>'",
-            '-F', 'to=rohitkrishnan101@gmail.com', '-F', "subject='Welcome to Runaway!'", '-F',
-            "html='" + welcomeEmail(from, to, cost, hours, mins) + "'"
+            '-F', 'to=' + email, '-F', "subject='Welcome to Runaway!'", '-F',
+            "html='" + welcomeEmail(from, to, cost, hours, mins) + "'", '-F', 'header="Reply-To:Kanye <OX3-6VVBUGnEF7t@parse-in1.mailjet.com>"'
         ]);
     }
 }
