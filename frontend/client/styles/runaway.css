@@ -20,8 +20,97 @@
 	color: rgb(189, 84, 84);
 }
 
-#map-canvas { width: 400px; height: 400px; margin: 0; padding: 0;}
+#map-canvas { 
+	width: 55%;
+	height: 400px;
+	position: absolute;
+	top: 90px;
+	left: 0px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	-webkit-box-shadow: 5px 5px 1px -5px rgba(0,0,0,0.75);
+	-moz-box-shadow: 5px 5px 1px -5px rgba(0,0,0,0.75);
+	box-shadow: 5px 5px 1px -5px rgba(0,0,0,0.75);
+	border-top: 7px solid green;
+}
 
+#postRoute{
+	margin-left:265px;
+}
+
+.itinerary{
+	width: 40%;
+	position:absolute;
+	right: 0px;
+	top: 90px;
+	height: 400px;
+	background-color: rgb(252, 252, 252);;
+	border-radius: 5px;
+	-webkit-box-shadow: 5px 5px 1px -5px rgba(0,0,0,0.75);
+	-moz-box-shadow: 5px 5px 1px -5px rgba(0,0,0,0.75);
+	box-shadow: 5px 5px 1px -5px rgba(0,0,0,0.75);
+	border-top: 7px solid purple;
+	color: rgb(94, 88, 88);
+}
+
+.iteneraryGroup p{
+	float: left;
+}
+
+.iteneraryGroup{
+	float: left;
+	width: 100%;
+}
+
+body{
+	text-shadow:none;
+}
+
+.timeGroup{
+	font-size: 37pt;
+	float: left;
+	margin-left: 112px;
+	color: rgb(47, 104, 129);
+}
+
+.costGroup{
+	font-size: 37pt;
+	float: right;
+	margin-right: 112px;
+	color: rgb(47, 104, 129);
+}
+
+.buttonGroups .btn-primary{
+	margin-right: 25px;
+}
+
+.finishEmail{
+	width: 40%;
+	position:absolute;
+	right: -1000px;
+	top: 90px;
+	height: 400px;
+	background-color: rgb(252, 252, 252);;
+	border-radius: 5px;
+	-webkit-box-shadow: 5px 5px 1px -5px rgba(0,0,0,0.75);
+	-moz-box-shadow: 5px 5px 1px -5px rgba(0,0,0,0.75);
+	box-shadow: 5px 5px 1px -5px rgba(0,0,0,0.75);
+	border-top: 7px solid purple;
+	color: rgb(94, 88, 88);
+	display: none;
+}
+.finishUpGroup{
+	padding:20px;
+}
+
+.sendButton{
+	font-size:20pt;
+	margin-top:60px;
+}
+
+.finishUpGroup div{
+	margin-top:10px;
+}
 
 .questionCont {
 	font-weight: 700;
