@@ -36,16 +36,16 @@ router.route('/route')
 		var budget = body.budget;
 		var hours = body.hours;
 
-		console.log(body);
+		console.log(lat + ' ' + lon + ' ' + hours);
 
-		res.send('post request to route recieved');
+		res.json({ message: 'post request to route recieved' });
 	})
 
 	.get(function(req, res) {
 		var body = req.body;
 		console.log(body);
 
-		res.send('get request to route recieved');
+		res.json({ message: 'get request to route recieved' });
 	});
 
 
@@ -72,9 +72,10 @@ var totalMiles = mpg * totalGallons;
 lat = 35.7748760;
 lon = -78.9514510;
 
-getDestination(lat, lon, 90, 10, function(point){
+/* getDestination(lat, lon, 90, 10, function(point){
 	console.log(point);
 });
+*/
 
 //	Gets you a point some distance away (km) in the bearing that you desire (deg)
 function getDestination(lat, lon, brng, dist, callback){
