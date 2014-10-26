@@ -10,6 +10,7 @@ postRequest = function(serverHost, serverPort, path, object, next) {
     Meteor.http.call("POST", url, {
         data: object
     }, function(error, result) {
+        console.log(result);
         next(error, result);
     });
 };

@@ -1,48 +1,139 @@
-var gm = require('googlemaps');
+var express = require('express');
+var app = express();
+var http = require('http');
+var server = http.Server(app);
+var request = require('request');
+var logfmt = require('logfmt');
+var bodyParser = require('body-parser');
+var router = express.Router();
 
-var totalRemaining = 50 * .3; // Dollars remaining
+var gm = require('googlemaps');
+var distance = require('google-distance');
+
+
 var mpg = 30; // Miles per gallon
 var totalGallons = 12; // Gallons per tank
 var gasPriceHere = 3.65; // Gas price in NC
-
-//	This is the current location of UNC Chapel Hill
-lat = 35.7748760;
-lon = -78.9514510;
-
-var totalMiles = (totalRemaining / (totalGallons * gasPriceHere)) * (mpg * totalGallons);
-
 var totalLocations = 8;
 
+var done = false;
+//  This is the current location of UNC Chapel Hill
+//lat = 35.7748760;
+//lon = -78.9514510;
+
+
+app.use(logfmt.requestLogger());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+// middleware
+router.use(function(req, res, next) {
+    console.log('happening');
+    next();
+});
+
+
+router.get('/', function(req, res) {
+    res.json({
+        message: 'hello world'
+    });
+    res.end();
+});
+
+// all routes that end in /route
+router.route('/route')
+    .post(function(req, res) {
+        var body = req.body;
+        var lat = body.lat;
+        var lon = body.lon;
+        var budget = body.budget;
+        var hours = body.hours;
+        done = false;
+        console.log(lat + ' ' + lon + ' ' + hours);
+        myLocation = [lat, lon];
+        radialPoints(lat, lon, budget, hours, function(pointsList) {
+            if (!done) {
+                done = true;
+                res.json({
+                    message: 'post request to route recieved',
+                    points: pointsList
+                });
+            }
+        });
+    })
+
+.get(function(req, res) {
+    var body = req.body;
+    res.json({
+        message: 'get request to route recieved'
+    });
+    res.end();
+});
+
+
+
+// all routes are prefixed with /api
+app.use('/api', router);
+
+
+var port = Number(process.env.PORT || 3000);
+
+// start up the server
+server.listen(port, function() {
+    console.log("listening on " + port);
+});
+
+
+//////////////////////////////////ALGORITHMZ/////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+
 var locationsArray = [];
+var totalRetries = 0;
+var myLocation = [];
 
-console.log("$" + totalRemaining + 
-	" on a " + mpg + "mpg car and " + totalGallons
-	 + " gallon tank can get you " + totalMiles + " miles.");
+function radialPoints(lat, lon, budget, hours, finalCallback) {
+    var gasMoneyOneWay = budget * .3; // Dollars remaining
+    var totalMiles = (gasMoneyOneWay / (totalGallons * gasPriceHere)) * (mpg * totalGallons);
+    locationsArray = [];
+    console.log("$" + gasMoneyOneWay +
+        " on a " + mpg + "mpg car and " + totalGallons + " gallon tank can get you " + totalMiles + " miles. Hours = " + hours + ".");
 
-for (var i = 0; i < totalLocations; i++) {
-    getDestination(lat, lon, 360 * i / totalLocations, totalMiles, handleResult);
-};
+    for (var i = 0; i < totalLocations; i++) {
+        getDestination(lat, lon, 360 * i / totalLocations, .8 * totalMiles, hours, handleResult, finalCallback);
+    };
+}
 
-function handleResult(result, lat, lon, brng, dist) {
+function handleResult(result, lat, lon, brng, dist, duration, finalCallback) {
     //	If there is no point at this location, then change the bearing a little bit and try again
-    if (result == null || result.length == 0) {
-    	brng = Math.floor(brng + 10);
-    	console.log("Couldn't find a spot, retrying " + dist + "miles at " + brng + " degrees");
-        getDestination(lat, lon, brng, dist, handleResult);
+    if (result == null) {
+        brng = Math.floor(brng + 10);
+        console.log("Couldn't find a spot, retry " + totalRetries + " and " + dist + "miles at " + brng + " degrees");
+        totalRetries++;
+        if (totalRetries > 5) {
+            console.log("Done!");
+            finalCallback(locationsArray);
+        } else {
+            getDestination(lat, lon, brng, dist, duration, handleResult, finalCallback);
+        }
     }
     //	If there is a point here, add it to the list of points you can visit.
     else {
-        locationsArray.push(result[0].formatted_address);
+        locationsArray.push(result);
+        console.log("PUSH!");
+        totalRetries = 0;
     }
 
-    if (locationsArray.length == totalLocations) {
-        console.log(locationsArray);
+    if (locationsArray.length >= totalLocations) {
+        console.log("DONE!");
+        finalCallback(locationsArray);
     }
 }
 
 //	Gets you a point some distance away (miles) in the bearing that you desire (deg)
-function getDestination(lat, lon, brng, miles, callback) {
-	dist = miles * 1.60934;
+function getDestination(lat, lon, brng, miles, duration, callback, finalCallback) {
+    dist = miles * 1.60934;
     dist = dist / 6371;
     brng = toRad(brng);
     //console.log("lat: " + lat + "lon:" + lon);
@@ -59,10 +150,35 @@ function getDestination(lat, lon, brng, miles, callback) {
     if (isNaN(lat2) || isNaN(lon2)) return null;
     lat2 = toDeg(lat2);
     lon2 = toDeg(lon2);
-    //console.log(lat2 + ", " + lon2);
-    gm.reverseGeocode(gm.checkAndConvertPoint([lat2, lon2]), function(err, data) {
-        callback(data.results, toDeg(lat) % 360, toDeg(lon) % 360, toDeg(brng), dist * 6371);
-    });
+    console.log(lat2 + ", " + lon2);
+    /*gm.reverseGeocode(gm.checkAndConvertPoint([lat2, lon2]), function(err, data) {
+        callback(data.results, toDeg(lat) % 360, toDeg(lon) % 360, toDeg(brng), dist * 6371 / 1.60934, finalCallback);
+    });*/
+    distance.get({
+            origin: myLocation[0] + "," + myLocation[1],
+            destination: lat2 + "," + lon2
+        },
+        function(err, data) {
+            //if (err) return console.log("Error in getting distance:" + err);
+            //console.log(data);
+            if (!err) {
+                if (data.durationValue > duration * 60 * 60) {
+                    console.log("Time " + data.durationValue / 3600 + " is longer than " + duration + ". Retrying with distance " + miles + " and angle " + toDeg(brng));
+                    return getDestination(lat, lon, toDeg(brng), .7 * miles, duration, callback, finalCallback);
+                } else {
+                    console.log("Time = " + data.durationValue / 3600);
+                    callback({
+                        lat: lat2,
+                        lon: lon2,
+                        hours: Math.floor(data.durationValue / 3600),
+                        mins: data.durationValue % 60,
+                        cost: ((data.distanceValue * 0.000621371) / 30) * gasPriceHere,
+                    }, lat, lon, toDeg(brng), dist * 6371 / 1.60934, duration, finalCallback);
+                }
+            } else {
+                callback(null, lat, lon, toDeg(brng), dist * 6371 / 1.60934, duration, finalCallback);
+            }
+        });
 };
 
 function toRad(deg) {

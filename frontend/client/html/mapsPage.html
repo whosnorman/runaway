@@ -1,4 +1,53 @@
 <template name="mapsPage">
 <div id="map-canvas"></div>
-<div id="postRoute" class="btn btn-default">CLick ME</div>
+{{>itinerary}}
+{{>finishEmail}}
+<br/>
+<div id="postRoute" class="btn btn-default">Click Me</div>
+</template>
+<template name="itinerary">
+<div class="itinerary">
+	<h1>Itinerary</h1>
+	<div class="iteneraryGroup">
+		<span class=""><b>From</b></span>
+		<span>{{mylocation}}</span>
+	</div>
+	<div class="iteneraryGroup">
+		<span class=""><b>To</b></span>
+		<span>{{destLocation}}</span>
+	</div>
+	<div class="timeGroup">
+		<span class=""><b>{{hours}}</b></span>
+		<span>h</span>
+		<span class=""><b>{{mins}}</b></span>
+		<span>m</span>
+	</div>
+	<div class="costGroup">
+		<span>$</span>
+		<span class=""><b>{{cost}}</b></span>
+	</div>
+	<div class="buttonGroups">
+		<button id="anotherItinerary" type="button" class="btn btn-primary">Another please!</button>
+		<button id="letsGo" type="button" class="btn btn-success">Let's Go!</button>
+	</div>
+</div>
+</template>
+<template name="finishEmail">
+<div class="finishEmail">
+	<h1>Finish up</h1>
+	<div class="finishUpGroup">
+		<div class="input-group">
+			<span class="input-group-addon">Full Name</span>
+			<input type="text" class="form-control" placeholder="Kanye West">
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon">Email Address</span>
+			<input type="text" class="form-control" placeholder="kanye@west.com">
+		</div>
+		<div class="btn btn-success sendButton">
+			<span class="glyphicon glyphicon-send"></span>
+			<span>Send it!</span>
+		</div>
+	</div>
+</div>
 </template>

@@ -7,6 +7,9 @@
     "googlemaps": "^0.1.20"
   },
   "dependencies": {
-    "googlemaps": "0.1.20"
+    "body-parser": "^1.9.1",
+    "googlemaps": "0.1.20",
+    "logfmt": "^1.2.0",
+    "request": "^2.46.0"
   }
 }
