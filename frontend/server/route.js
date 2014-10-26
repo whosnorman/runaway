@@ -48,6 +48,38 @@ Meteor.methods({
     }
 });
 
+Router.map(function() {
+    this.route('getProfilePic', {
+        path: '/mail/:_id/reply',
+        where: 'server',
+        action: function() {
+            if (this.request.method == "GET") {
+                console.log("Email web hook!");
+                if (this.params._id) {
+                    var group = Groups.findOne({
+                        _id: this.params._id
+                    });
+                    var traveler1 = Users.findOne({
+                        _id: group.travelers[0]
+                    });
+
+                    var traveler2 = Users.findOne({
+                        _id: group.travelers[1]
+                    });
+
+                    spawn = Npm.require('child_process').spawn;
+                    var parse_text = "";
+                    mailjet = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
+                        'https://api.mailjet.com/v3/send/message', '-F', "from='Runaway Server <runawayyesreply@gmail.com>'",
+                        '-F', 'to=' + traveler1.email + ";" + traveler2.email, '-F', "subject='Your traveler replied!'", '-F',
+                        "html='" + matchEmail(from, to, cost, hours, mins) + "'"
+                    ]);
+                }
+            }
+        }
+    });
+});
+
 
 function sendEmail(newGroupID, fullName, email, lat, lon, from, to, hours, mins, cost) {
     /*
@@ -70,10 +102,10 @@ function sendEmail(newGroupID, fullName, email, lat, lon, from, to, hours, mins,
             '-F', 'to=rohitkrishnan101@gmail.com', '-F', "subject='You have a match!'", '-F',
             "html='" + matchEmail(from, to, cost, hours, mins) + "'"
         ]);*/
-        /*parseroute = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
+        parseroute = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
             'http://api.mailjet.com/v3/REST/parseroute', '-d', '{"URL":"http://your-domain/webhook"}',
             '-H', "Content-Type: application/json"
-        ]);*/
+        ]);
     } else {
         /*mailjet = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
             'https://api.mailjet.com/v3/send/message', '-F', "from='Runaway Server <runawayyesreply@gmail.com>'",
