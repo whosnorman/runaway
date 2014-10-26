@@ -3,7 +3,7 @@
 {{>itinerary}}
 {{>finishEmail}}
 <br/>
-<div id="postRoute" class="btn btn-default">Click Me</div>
+
 </template>
 <template name="itinerary">
 <div class="itinerary">
@@ -17,23 +17,34 @@
 		<span class=""><b>To: </b></span>
 		<span>{{destLocation}}</span>
 	</div>
+	<table style="padding: 15px; margin-top: 25px; width: 100%">
+		<tr>
+			<td style="width: 70%">
+				<div class="timeGroup" >
+					<span class=""><b>{{hours}}</b></span>
+					<span>h</span>
+					<span class=""><b>{{mins}}</b></span>
+					<span>m</span>
+				</div>
+			</td>
+			<td>
+				<div class="tanksGroup">
+					<span>{{gasTanks}}</span>
+					<span class="small"><br />full tanks</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="costGroup">
+					<span>$</span>
+					<span class=""><b>{{cost}}</b></span>
+				</div>
+			</td>
+		</tr>
+	</table>
 
-	<div class="timeGroup">
-		<span class=""><b>{{hours}}</b></span>
-		<span>h</span>
-		<span class=""><b>{{mins}}</b></span>
-		<span>m</span><span class="smaller"> one way</span>
-	</div>
-
-	<div class="costGroup">
-		<span>$</span>
-		<span class=""><b>{{cost}}</b></span>
-	</div>
-
-	<div class="tanksGroup">
-		<span>{{gasTanks}}</span>
-		<span class=""><b>full tanks</b></span>
-	</div>
+	
 
 </div>
 
@@ -46,17 +57,17 @@
 
 <template name="finishEmail">
 <div class="finishEmail">
-	<h1>Finish up</h1>
+	<h1>Almost Done!</h1>
 	<div class="finishUpGroup">
-		<div class="input-group">
-			<span class="input-group-addon">Full Name</span>
-			<input id="inputName" type="text" class="form-control" placeholder="Kanye West">
+		<div>
+			<div class="inputHead">Full Name</div>
+			<input id="inputName" type="text" class="inputStyle" placeholder="Kanye West">
 		</div>
-		<div class="input-group">
-			<span class="input-group-addon">Email Address</span>
-			<input id="inputEmail" type="text" class="form-control" placeholder="kanye@west.com">
+		<div>
+			<div class="inputHead">Email Address</div>
+			<input id="inputEmail" type="text" class="inputStyle" placeholder="kanye@west.com">
 		</div>
-		<div class="btn btn-success sendButton">
+		<div class="inputBtn">
 			<span class="glyphicon glyphicon-send"></span>
 			<span>Send it!</span>
 		</div>

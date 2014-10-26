@@ -70,10 +70,25 @@ body{
 	text-shadow:none;
 }
 
+.tanksGroup{
+	font-size: 50pt;
+	font-weight: 700;
+	line-height: 25px;
+	text-align: center;
+	margin-top: 30px;
+
+}
+
+.tanksGroup .small {
+	font-size: 17pt;
+	font-weight: 100 !important;
+	text-align: center;
+}
+
 .timeGroup{
 	font-size: 37pt;
 	text-align: left;
-	margin-left: 112px;
+	margin-left: 75px;
 	color: #fff;	
 }
 
@@ -85,9 +100,10 @@ span .smaller{
 /* color: rgb(47, 104, 129); */
 
 .costGroup{
+	padding-top: 15px;
+	text-align: left;
+	margin-left: 75px;
 	font-size: 37pt;
-	float: right;
-	margin-right: 112px;
 	color: #fff;
 }
 
@@ -104,20 +120,26 @@ span .smaller{
 }
 
 .finishEmail{
-	width: 40%;
-	position:absolute;
+	width: 55%;
+	margin-top: 430px;
+	left: 23em;
 	right: -1000px;
-	top: 90px;
+	position: relative;
 	height: 400px;
-	background-color: rgb(252, 252, 252);;
-	border-radius: 5px;
-	-webkit-box-shadow: 5px 5px 1px -5px rgba(0,0,0,0.75);
-	-moz-box-shadow: 5px 5px 1px -5px rgba(0,0,0,0.75);
-	box-shadow: 5px 5px 1px -5px rgba(0,0,0,0.75);
-	border-top: 7px solid purple;
-	color: rgb(94, 88, 88);
+	background-color: #706585;
+	border-radius: 15px;
+	border-bottom: #95a5a4 5px solid;
+	color: #fff;
 	display: none;
 }
+
+.finishEmail h1 {
+	padding: 30px;
+	width: 100%;
+	text-align: left;
+	font-weight: 700;
+}
+
 .finishUpGroup{
 	padding:20px;
 }
@@ -129,6 +151,44 @@ span .smaller{
 
 .finishUpGroup div{
 	margin-top:10px;
+}
+
+.inputStyle {
+	font-size: 25pt;
+	background: none;
+	border: none;
+	border-bottom: 5px #fff dashed;
+	color: #fff;
+	outline: none;
+}
+
+.inputHead {
+	float: left;
+	text-align: left;
+	font-size: 25pt;
+	color: #fff;
+	font-weight: 700;
+	margin-left: 30px;
+}
+
+.inputBtn {
+	margin-top: 47px !important;
+	text-align: center;
+	font-weight: 100;
+	font-size: 20pt;
+	color: #fff;
+	background-color: #E24D42;
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-top: 10px;
+	border-radius: 7px;
+	width: 250px;
+	margin-left: 62%;
+}
+
+.inputBtn:hover {
+	cursor: pointer;
+	background-color: #EB8076;
 }
 
 .questionCont {
@@ -284,4 +344,20 @@ span .smaller{
 	margin-left: calc(50% - 100px);
 	color: #706585;
 	font-weight: 700;
+}
+
+.thanks {
+	top: 200px;
+	font-size: 80pt;
+	font-weight: 700;
+	left: 40%;
+	color: #706585;
+}
+
+.thanksLittle {
+	margin-top: 50px;
+	font-size: 60pt;
+	font-weight: 100;
+	left: 40%;
+	color: #E24D42;
 }

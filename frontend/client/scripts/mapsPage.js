@@ -229,6 +229,8 @@ Template.itinerary.events({
         }, 500, function() {
             $(".itinerary").css("display", "none");
             $(".finishEmail").css("display", "block");
+            $('#anotherItinerary').css("display","none");
+            $('#letsGo').css("display","none");
             $(".finishEmail").animate({
                 right: "+=1000",
             }, 500, function() {
@@ -243,6 +245,7 @@ Template.finishEmail.events({
         Meteor.call('api_finishUp', $("#inputName").val(), $("#inputEmail").val(),
             myLat, myLon, Session.get("mylocation"), Session.get("destLocation"),
             Session.get("hours"), Session.get("mins"), Session.get("cost"));
+        window.location = '/thanks';
     }
 });
 
