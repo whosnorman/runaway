@@ -88,10 +88,9 @@ function sendEmail(newGroupID, fullName, email, lat, lon, from, to, hours, mins,
     -F from='Miss Mailjet <ms.mailjet@example.com>' \    -F to=mr.mailjet@example.com \    -F subject='Hello World!' \    -F text='Greetings from Mailjet.'XReplaceAll.*Aa\
 
     //Parse route
-    curl -X POST --user "$MJ_APIKEY_PUBLIC:$MJ_APIKEY_PRIVATE" \
-            http://api.mailjet.com/v3/REST/parseroute \   
-         -d '{"URL":"http://your-domain/webhook"}' \   
-         -H "Content-Type: application/json"
+    curl -X POST --user "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c" \
+    http://api.mailjet.com/v3/REST/parseroute -d '{"URL":"http://your-domain/webhook"}'\
+    -H "Content-Type: application/json"
     */
     spawn = Npm.require('child_process').spawn;
     var parse_text = "";
@@ -103,9 +102,18 @@ function sendEmail(newGroupID, fullName, email, lat, lon, from, to, hours, mins,
             "html='" + matchEmail(from, to, cost, hours, mins) + "'"
         ]);*/
         parseroute = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
-            'http://api.mailjet.com/v3/REST/parseroute', '-d', '{"URL":"http://your-domain/webhook"}',
+            'http://api.mailjet.com/v3/REST/parseroute', '-d', '{"URL":"http://104.131.28.192/mail/' + newGroupID + '/reply"}',
             '-H', "Content-Type: application/json"
         ]);
+
+        parseroute.stdout.on('data', function(data) {
+            parse_text += data.toString('utf8', 0, data.length);
+        });
+
+        parseroute.on('exit', Meteor.bindEnvironment(function(code) {
+            var newEmail = JSON.parse(parse_text);
+            console.log(newEmail);
+        }));
     } else {
         /*mailjet = spawn('curl', ['-X', 'POST', '--user', "168e11004bf9b958273a58d65983c3c9:a3c92c3c92fe031f939cc2f83aa20f2c",
             'https://api.mailjet.com/v3/send/message', '-F', "from='Runaway Server <runawayyesreply@gmail.com>'",
