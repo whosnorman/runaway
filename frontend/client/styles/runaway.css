@@ -22,11 +22,11 @@
 
 
 #map-canvas { 
-	width: 55%;
+	width: 77%;
 	height: 400px;
 	position: absolute;
 	top: 65px;
-	left: 23em;
+	left: 13em;
 	border-radius: 15px;
 	border-bottom: #95a5a4 5px solid;
 }
@@ -37,7 +37,7 @@
 
 .itinerary{
 	width: 55%;
-	top: 300px;
+	margin-top: 430px;
 	left: 23em;
 	position: relative;
 	height: 400px;
@@ -72,9 +72,14 @@ body{
 
 .timeGroup{
 	font-size: 37pt;
-	float: left;
+	text-align: left;
 	margin-left: 112px;
 	color: #fff;	
+}
+
+span .smaller{
+	font-size: : 25pt !important; 
+	font-weight: 700;
 }
 
 /* color: rgb(47, 104, 129); */
@@ -88,6 +93,14 @@ body{
 
 .buttonGroups .btn-primary{
 	margin-right: 25px;
+	float: right;
+	margin-top: -200px;
+}
+
+.btn-success {
+	float: left;
+	margin-left: 50px;
+	margin-top: -200px;
 }
 
 .finishEmail{
