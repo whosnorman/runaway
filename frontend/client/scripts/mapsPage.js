@@ -156,7 +156,16 @@ Template.itinerary.events({
             });
         });
     }
-})
+});
+
+Template.finishEmail.events({
+	'click .sendButton': function(event){
+		Meteor.call('api_finishUp', $("#inputName").val(), $("#inputEmail").val(),
+            myLat, myLon, Session.get("mylocation"), Session.get("destLocation"), 
+            Session.get("hours"), Session.get("mins"), Session.get("cost"));
+	}
+});
+
 Template.mapsPage.events({
     'click #postRoute': function(event) {
         Meteor.call('api_postRoute', myLat, myLon, 100, 5, function(error, result) {
