@@ -11,5 +11,9 @@ Router.map(function() {
   this.route('mapsPage', {
     path: '/maps'
   });
+
+  this.route('thanksPage', {
+  	path:'/thanks'
+  });
 });
 
