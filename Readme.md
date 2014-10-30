@@ -17,15 +17,18 @@ Tech
 Runaway uses a number of API's/Platforms to work properly:
 
 * [Mail Jet] - Awesome e-mail delivery service. 
-* [Google Maps API] - Render maps on the fly client-side
+* [Google Maps] - Render maps on the fly client-side
 * [Twitter Bootstrap] - Great UI for the website
 * [Node.js] - Evented I/O for the backend
 * [Express.js] - Framework used to build the REST-based backend
 * [Meteor.js] - Build apps that use Node.js client-side and server-side
 * [jQuery] - duh 
 * [Digital Ocean] - Put this app on the Interwebz
-* [Google Directions API] - Calculates directions/distance between locations
-* [Google Geocoding API] - Reverse-geocode a bunch of lat/lon's
+* [Google Directions] - Calculates directions/distance between locations
+* [Google Geocoding] - Reverse-geocode a bunch of lat/lon's
+--------------
+
+
 --------------
 Prerequisites
 --------------
@@ -68,6 +71,6 @@ MIT
 [Express.js]:http://expressjs.com
 [Meteor.js]:http://meteor.com
 [Digital Ocean]:http://digitalocean.com
-[Google Directions API]:https://developers.google.com/maps/documentation/directions/
-[Google Geocoding API]:https://developers.google.com/maps/documentation/geocoding/
-[Google Maps API]:https://developers.google.com/maps/
+[Google Directions]:https://developers.google.com/maps/documentation/directions/
+[Google Geocoding]:https://developers.google.com/maps/documentation/geocoding/
+[Google Maps]:https://developers.google.com/maps/
