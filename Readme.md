@@ -6,8 +6,9 @@ Runaway
 Runaway is a road-trip generator made to pair you up with local travelers for a weekend of affordable and time efficient fun.
 
 
---------------
+
 Tech
+--------------
 
 Runaway uses a number of API's/Platforms to work properly:
 
@@ -28,7 +29,7 @@ Prerequisites
 * [Node.js] - Tested with version v0.10.29
 * [Meteor.js] - Tested with v0.9.4
 
---------------
+
 Installation
 --------------
 
@@ -37,7 +38,7 @@ git clone https://github.com/mattohagan/runaway.git runaway
 cd runaway/backend
 npm install
 ```
---------------
+
 Starting the server
 --------------
 #####The Backend
@@ -52,7 +53,7 @@ meteor --port 3000
 ```
 #####Point your favorite browser to http://localhost:3000 and Runaway!
 
---------------
+
 License
 --------------
 MIT
