@@ -3,15 +3,11 @@ Runaway
 ####Let us make your escape plan.
 #####Version 1.0
 
---------------
-
-
 Runaway is a road-trip generator made to pair you up with local travelers for a weekend of affordable and time efficient fun.
 
 
 --------------
 Tech
------------
 
 Runaway uses a number of API's/Platforms to work properly:
 
