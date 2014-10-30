@@ -58,6 +58,8 @@ License
 --------------
 MIT
 
+![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+
 [Mail Jet]:http://mailjet.com
 [Twitter Bootstrap]:http://twitter.github.com/bootstrap/
 [jQuery]:http://jquery.com
