@@ -5,7 +5,9 @@ Runaway
 
 Runaway is a road-trip generator made to pair you up with local travelers for a weekend of affordable and time efficient fun.
 
-
+<p align="center">
+  <img src="/frontend/public/img/builtWithImage.png"/>
+</p>
 
 Tech
 --------------
@@ -58,7 +60,6 @@ License
 --------------
 MIT
 
-![Built with love](/frontend/public/img/builtWithImage.png)
 
 [Mail Jet]:http://mailjet.com
 [Twitter Bootstrap]:http://twitter.github.com/bootstrap/
