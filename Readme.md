@@ -16,11 +16,10 @@ Runaway uses a number of API's/Platforms to work properly:
 
 - [Mail Jet] - Awesome e-mail delivery service. 
 - [Google Maps] - Render maps on the fly client-side
-- [Twitter Bootstrap] - Great UI for the website
 - [Node.js] - Evented I/O for the backend
 - [Express.js] - Framework used to build the REST-based backend
 - [Meteor.js] - Build apps that use Node.js client-side and server-side
-- [jQuery] - duh 
+- [jQuery] - Ovious things are obvious 
 - [Digital Ocean] - Put this app on the Interwebz
 - [Google Directions] - Calculates directions/distance between locations
 - [Google Geocoding] - Reverse-geocode a bunch of lat/lon's
@@ -62,7 +61,6 @@ MIT
 
 
 [Mail Jet]:http://mailjet.com
-[Twitter Bootstrap]:http://twitter.github.com/bootstrap/
 [jQuery]:http://jquery.com
 [Node.js]:http://nodejs.org
 [Express.js]:http://expressjs.com
