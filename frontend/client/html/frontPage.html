@@ -20,7 +20,6 @@
 			<div class="circle"></div>
 			<div class="line2"></div>
 			<div class="circle"></div>
-
 		</div>
 
 
@@ -80,6 +79,7 @@
 	</div>
 
 	<div id="submitBtn" class="questionBtn">Runaway</div>
+	<!-- <div id="locTest" class="questionBtn" style="left='100px';">Location</div> -->
 
 	<div class="bottomPhrase"> 
 		<p>Built with <span class="red glyphicon glyphicon-heart"></span> @ HackNC</p>
@@ -104,5 +104,24 @@
 	<script src="scripts/nlform.js"></script>
 	<script>
 		var nlform = new NLForm( document.getElementById( 'nl-form' ) );
+
+		function getLocation() {
+		    navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
+		}
+		 
+		function locationSuccess(position) {
+		    loc = {
+		    	lat: position.coords.latitude,
+		    	lon: position.coords.longitude
+		    }
+		    
+		    console.log(loc);
+		}
+		 
+		function locationError(error) {
+		    console.log('Error getting location: ' + error.code);
+		}
+		 
+		getLocation();
 	</script>
 </template>

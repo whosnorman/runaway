@@ -10,12 +10,15 @@ Template.frontPage.events({
 		console.log(people);
 		console.log(100);
 		console.log(days * 10);
+		console.log(loc);
+		console.log(vehicle);
 
 		Session.set('frontDays', days);
 		Session.set('frontBudget', budget);
 		Session.set('frontVehicle', vehicle);
 		Session.set('frontPeople', people);
+		Session.set('location', loc);
 
 		Router.go('/maps');
-    }
+    },
 });
