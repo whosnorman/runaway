@@ -22,3 +22,23 @@ Template.frontPage.events({
 		Router.go('/maps');
     },
 });
+
+
+
+var lineWidth = ($('.dragLine').width())-15;
+
+$('.dragBtn').draggable({ 
+});    
+
+$('.welcomeHead').draggable();
+
+$('.dragBtn').on('drag', function(){ 
+   var position = $('.dragBtn').position();
+  var marginTop = position.top;
+  console.log('dragged');
+  //$('.line').css({ 
+//    'clip': 'rect('+ marginTop +'px,8px, 183px,0px)' 
+  //}); 
+  
+});
+
