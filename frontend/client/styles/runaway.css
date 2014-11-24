@@ -16,6 +16,14 @@
 	src: url('/fonts/BebasNeue.otf');
 }
 
+::selection {
+  background: #303030; 
+}
+
+::-moz-selection {
+  background: #303030; 
+}
+
 
 .slider {
 	height: 50px;
