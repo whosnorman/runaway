@@ -41,14 +41,18 @@
 
 			<div class="questionCont">
 				<p> With a budget <br /> of $
-					<input id="budget" type="text" value="" placeholder="100.00" data-subline="Includes gas, food, & tourism"/>
+					<cont id="budgetCont">
+						<input id="budget" type="text" value="" placeholder="100.00" data-subline="Includes gas, food, & tourism"/>
+					</cont>
 				</p>
 				<div class="slider">
 					<div class="dragLine">
-						<!--<div class="line"></div>-->
+						<div class="line"></div>
 						<div class="dragBtn"></div>
 					</div>
 				</div>
+				<div class="belowSlider">Misc: ${{miscPer}} </div>
+				<div id="gasPer" class="belowSlider">Gas: ${{gasPer}} </div>
 			</div>
 
 			<!--

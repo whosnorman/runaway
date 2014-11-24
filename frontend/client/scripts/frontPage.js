@@ -21,24 +21,71 @@ Template.frontPage.events({
 
 		Router.go('/maps');
     },
+
 });
 
+Template.frontPage.rendered = function(){
+	$('.dragBtn').draggable({ 
+		axis: 'x',
+		containment: 'parent'
+	});    
+
+	//for whatever
+	$('.welcomeHead').draggable();
+
+	$('.dragBtn').on('drag', function(){ 
+	  updateSlider();
+	});
+
+	$('#budgetCont input').keyup(function(){
+    	console.log('keyup');
+    	updateSlider();
+    });
+
+}
+
+Template.frontPage.helpers({
+	gasPer: function(){
+		return Session.get('gasPercentage');
+	},
+	miscPer: function(){
+		return Session.get('miscPercentage');
+	}
+})
 
 
-var lineWidth = ($('.dragLine').width())-15;
+updateSlider = function(){
+  var position = $('.dragBtn').position();
+  var marginLeft = position.left + 15;
+  var width = $('.dragLine').width();
+  var curr = position.left;
+  // adjust for widths
+  if (curr >= 50)
+  	curr += $('.dragBtn').width();
 
-$('.dragBtn').draggable({ 
-});    
-
-$('.welcomeHead').draggable();
-
-$('.dragBtn').on('drag', function(){ 
-   var position = $('.dragBtn').position();
-  var marginTop = position.top;
-  console.log('dragged');
-  //$('.line').css({ 
-//    'clip': 'rect('+ marginTop +'px,8px, 183px,0px)' 
-  //}); 
+  var percentage = (curr / width);
   
-});
+  $('.line').css({ 
+    'width': marginLeft + 'px'
+  }); 
 
+  //var budgetInput = parseInt($('#budget').val());
+  var budgetInput = parseInt($('#budgetCont input').val());
+  var currBudget;
+
+  if(budgetInput)
+  	currBudget = budgetInput;
+  else
+  	currBudget = 100;
+
+  console.log('set');
+
+  var gasPer = Math.round(currBudget * percentage);
+  var miscPer = Math.round(currBudget - gasPer);
+
+  console.log(gasPer);
+  console.log(miscPer);
+
+  Session.set('gasPercentage', gasPer);
+  Session.set('miscPercentage', miscPer);
+}

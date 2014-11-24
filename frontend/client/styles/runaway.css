@@ -21,17 +21,16 @@
 	height: 50px;
 	width: 80%;
 	position: relative;
-	background-color: #fff;
+	background-color: #EB8076;
 	border-radius: 5px;
 	margin: 10px auto;
-	margin-top: 15px;
-	margin-bottom: -20px;
+	margin-top: 25px;
 }
 
 .dragLine {
 	width: 80%;
 	height: 10px;
-	background: #95a5a4;
+	background-color: rgba(255, 255, 255, 0.4);
 	border-radius:8px;
 	margin-top: 20px;
 	margin-left: 10%;
@@ -39,15 +38,15 @@
 
 }
 .line {
-	width: 100%;
+	width: 73%;
 	height: 10px;
-	background: #fff;
+	background: #706585;
 	border-radius:8px;
-	border: 1px solid blue;
 	position: absolute;
-
 }
-/* clip: rect(0px, 100px, 20px, 50px); */
+/* clip: rect(0px, 100px, 20px, 50px); 
+
+	box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.2);*/
 
 .dragBtn {
 	width:29px; 
@@ -55,10 +54,27 @@
 	background: #706585;
 	border-radius:50%;
 	position:absolute;
-	box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.2);
 	cursor:pointer;
 	margin-top: -10px;
+	left: 70%;
 }
+
+.belowSlider {
+	font-size: 22pt;
+	margin-bottom: -30px;
+	margin-left: 10%;
+	text-align: left;
+	color: #EB8076;
+	position: relative;
+}
+
+.belowSlider:nth-child(odd) {
+	float: right;
+	margin-right: 10%;
+	position: relative;
+}
+
+
 
 
 .red{
