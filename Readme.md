@@ -45,7 +45,7 @@ Starting the server
 #####The Backend
 ```sh
 cd runaway/backend
-node serve.js
+node server.js
 ```
 #####The Frontend
 ```sh
