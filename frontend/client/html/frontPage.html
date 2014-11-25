@@ -125,28 +125,4 @@
 	<a href="#" class="btn btn-lg btn-default">Learn more</a>
 	</p> -->
 	</div>
-
-	<script src="scripts/nlform.js"></script>
-	<script>
-		var nlform = new NLForm( document.getElementById( 'nl-form' ) );
-
-		function getLocation() {
-		    navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
-		}
-		 
-		function locationSuccess(position) {
-		    loc = {
-		    	lat: position.coords.latitude,
-		    	lon: position.coords.longitude
-		    }
-		    
-		    console.log(loc);
-		}
-		 
-		function locationError(error) {
-		    console.log('Error getting location: ' + error.code);
-		}
-		 
-		getLocation();
-	</script>
 </template>

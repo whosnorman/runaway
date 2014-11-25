@@ -78,6 +78,14 @@ Template.mapsPage.rendered = function() {
         styles: map_style,
         zoom: 4
     };
+
+    if(Session.get("browserLocation")){
+        myLat = Session.get("browserLocation").lat || myLat;
+        myLon = Session.get("browserLocation").lon || myLon;
+        mapOptions.center.lat = myLat;
+        mapOptions.center.lon = myLon;
+    }
+
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
     directionsService = new google.maps.DirectionsService();
@@ -91,15 +99,11 @@ Template.mapsPage.rendered = function() {
 
     var people = Session.get('frontPeople') || 1;
 
-    console.log(frontBud);
-    console.log(100);
-    console.log(frontHours);
-    console.log(5);
+    var gasPercentage = Session.get("gasPercentage") || 60;
 
-    Meteor.call('api_postRoute', myLat, myLon, frontBud, frontHours, function(error, result) {
+    Meteor.call('api_postRoute', myLat, myLon, frontBud, gasPercentage, frontHours, function(error, result) {
         if (error)
             console.log(error)
-        console.log("=========================");
         console.log(result);
 
         Session.set("itNumber", 1);
@@ -110,10 +114,7 @@ Template.mapsPage.rendered = function() {
         if (people > 0) {
             var total = result.points[0].cost;
             var per = Math.round(total * 100 / (people + 1)) / 100;
-            console.log(per);
             var string = per.toString() + '/per person';
-            console.log("!!!!!!!!!!!!!!!!1");
-            console.log(string);
             Session.set("cost", string);
         } else {
             Session.set("cost", result.points[0].cost);
@@ -246,43 +247,5 @@ Template.finishEmail.events({
             myLat, myLon, Session.get("mylocation"), Session.get("destLocation"),
             Session.get("hours"), Session.get("mins"), Session.get("cost"));
         window.location.href = '/thanks';
-    }
-});
-
-Template.mapsPage.events({
-    'click #postRoute': function(event) {
-        Meteor.call('api_postRoute', myLat, myLon, 100, 5, function(error, result) {
-            if (error)
-                console.log(error)
-            Session.set("itNumber", 1);
-            Session.set("results", result);
-            Session.set("hours", result.points[0].hours);
-            Session.set("mins", result.points[0].mins);
-            Session.set("cost", result.points[0].cost);
-            // To add the marker to the map, use the 'map' property
-            $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + myLat + "," + myLon + '&sensor=false', null, function(data) {
-                Session.set("mylocation", data.results[0].formatted_address);
-            });
-            $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + result.points[0].lat + "," + result.points[0].lon + '&sensor=false', null, function(data) {
-                var p = data.results[0].geometry.location;
-                Session.set("destLocation", data.results[0].formatted_address);
-                var latlng = new google.maps.LatLng(p.lat, p.lng);
-                /*new google.maps.Marker({
-                    position: latlng,
-                    map: map
-                });*/
-
-                var request = {
-                    origin: myLat + "," + myLon,
-                    destination: data.results[0].formatted_address,
-                    travelMode: google.maps.TravelMode.DRIVING
-                };
-                directionsService.route(request, function(result, status) {
-                    if (status == google.maps.DirectionsStatus.OK) {
-                        directionsDisplay.setDirections(result);
-                    }
-                });
-            });
-        });
     }
 });

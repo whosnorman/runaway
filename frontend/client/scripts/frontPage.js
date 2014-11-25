@@ -1,91 +1,114 @@
 Template.frontPage.events({
     'click #submitBtn': function(event) {
-    	var days = parseInt($('#days option:selected').text());
-		var budget = parseInt($('#budget').val());
-		var vehicle = $('#vehicle option:selected').text();
-		var people = parseInt($('#people option:selected').text());
+        var days = parseInt($('#days option:selected').text());
+        var budget = parseInt($('#budget').val());
+        var vehicle = $('#vehicle option:selected').text();
+        var people = parseInt($('#people option:selected').text());
 
-		console.log(days);
-		console.log(budget);
-		console.log(people);
-		console.log(100);
-		console.log(days * 10);
-		console.log(loc);
-		console.log(vehicle);
+        console.log(days);
+        console.log(budget);
+        console.log(people);
+        console.log(100);
+        console.log(days * 10);
+        console.log(loc);
+        console.log(vehicle);
 
-		Session.set('frontDays', days);
-		Session.set('frontBudget', budget);
-		Session.set('frontVehicle', vehicle);
-		Session.set('frontPeople', people);
-		Session.set('location', loc);
+        Session.set('frontDays', days);
+        Session.set('frontBudget', budget);
+        Session.set('frontVehicle', vehicle);
+        Session.set('frontPeople', people);
+        Session.set('location', loc);
 
-		Router.go('/maps');
+        Router.go('/maps');
     },
 
 });
 
-Template.frontPage.rendered = function(){
-	$('.dragBtn').draggable({ 
-		axis: 'x',
-		containment: 'parent'
-	});    
+Template.frontPage.rendered = function() {
+    var nlform = new NLForm(document.getElementById('nl-form'));
 
-	//for whatever
-	$('.welcomeHead').draggable();
-
-	$('.dragBtn').on('drag', function(){ 
-	  updateSlider();
-	});
-
-	$('#budgetCont input').keyup(function(){
-    	console.log('keyup');
-    	updateSlider();
+    $('.dragBtn').draggable({
+        axis: 'x',
+        containment: 'parent'
     });
+
+    //for whatever
+    $('.welcomeHead').draggable();
+
+    $('.dragBtn').on('drag', function() {
+        updateSlider();
+    });
+
+    $('#budgetCont input').keyup(function() {
+        console.log('keyup');
+        updateSlider();
+    });
+
+    getLocation();
 
 }
 
 Template.frontPage.helpers({
-	gasPer: function(){
-		return Session.get('gasPercentage');
-	},
-	miscPer: function(){
-		return Session.get('miscPercentage');
-	}
+    gasPer: function() {
+        return Session.get('gasPercentage');
+    },
+    miscPer: function() {
+        return Session.get('miscPercentage');
+    }
 })
 
 
-updateSlider = function(){
-  var position = $('.dragBtn').position();
-  var marginLeft = position.left + 15;
-  var width = $('.dragLine').width();
-  var curr = position.left;
-  // adjust for widths
-  if (curr >= 50)
-  	curr += $('.dragBtn').width();
+updateSlider = function() {
+    var position = $('.dragBtn').position();
+    var marginLeft = position.left + 15;
+    var width = $('.dragLine').width();
+    var curr = position.left;
+    // adjust for widths
+    if (curr >= 50)
+        curr += $('.dragBtn').width();
 
-  var percentage = (curr / width);
-  
-  $('.line').css({ 
-    'width': marginLeft + 'px'
-  }); 
+    var percentage = (curr / width);
 
-  //var budgetInput = parseInt($('#budget').val());
-  var budgetInput = parseInt($('#budgetCont input').val());
-  var currBudget;
+    $('.line').css({
+        'width': marginLeft + 'px'
+    });
 
-  if(budgetInput)
-  	currBudget = budgetInput;
-  else
-  	currBudget = 100;
+    //var budgetInput = parseInt($('#budget').val());
+    var budgetInput = parseInt($('#budgetCont input').val());
+    var currBudget;
 
-  console.log('set');
+    if (budgetInput)
+        currBudget = budgetInput;
+    else
+        currBudget = 100;
 
-  var gasPer = Math.round(currBudget * percentage);
-  var miscPer = Math.round(currBudget - gasPer);
+    console.log('set');
 
-  console.log(gasPer);
-  console.log(miscPer);
+    var gasPer = Math.round(currBudget * percentage);
+    var miscPer = Math.round(currBudget - gasPer);
 
-  Session.set('gasPercentage', gasPer);
-  Session.set('miscPercentage', miscPer);
+    console.log(gasPer);
+    console.log(miscPer);
+
+    Session.set('gasPercentage', gasPer);
+    Session.set('miscPercentage', miscPer);
+}
+
+
+function getLocation() {
+    navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
+}
+
+function locationSuccess(position) {
+    loc = {
+        lat: position.coords.latitude,
+        lon: position.coords.longitude
+    }
+
+    Session.set("browserLocation", loc);
+    console.log(loc);
+}
+
+function locationError(error) {
+    console.log('Error getting location: ' + error.code);
 }

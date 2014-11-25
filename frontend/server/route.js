@@ -46,13 +46,14 @@ function matchEmail(from, to, cost, hours, mins) {
     + '</html>'
 };
 Meteor.methods({
-    api_postRoute: function(lat, lon, budget, hours) {
+    api_postRoute: function(lat, lon, budget, gasPercentage, hours) {
         var fut = new Future();
-        postRequest("http://127.0.0.127", 3000, '/api/route', {
+        postRequest("http://127.0.0.1", 3000, '/api/route', {
             lat: lat,
             lon: lon,
             budget: budget,
-            hours: hours
+            hours: hours,
+            gasPercentage: gasPercentage
         }, function(error, result) {
             if (result) {
                 fut['return'](result.data);

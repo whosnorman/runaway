@@ -17,10 +17,6 @@ var gasPriceHere = 3.65; // Gas price in NC
 var totalLocations = 8;
 
 var done = false;
-//  This is the current location of UNC Chapel Hill
-//lat = 35.7748760;
-//lon = -78.9514510;
-
 
 app.use(logfmt.requestLogger());
 app.use(bodyParser.json());
@@ -50,10 +46,11 @@ router.route('/route')
         var lon = body.lon;
         var budget = body.budget;
         var hours = body.hours;
+        var gasPercentage = body.gasPercentage;
         done = false;
         console.log(lat + ' ' + lon + ' ' + hours);
         myLocation = [lat, lon];
-        radialPoints(lat, lon, budget, hours, function(pointsList) {
+        radialPoints(lat, lon, budget, gasPercentage, hours, function(pointsList) {
             if (!done) {
                 done = true;
                 res.json({
@@ -93,11 +90,8 @@ var locationsArray = [];
 var totalRetries = 0;
 var myLocation = [];
 
-function radialPoints(lat, lon, budget, hours, finalCallback) {
-
-
-
-    var gasMoneyOneWay = budget * .3; // Dollars remaining
+function radialPoints(lat, lon, budget, gasPercentage, hours, finalCallback) {
+    var gasMoneyOneWay = budget * (gasPercentage / 200); // Dollars remaining
     var totalMiles = (gasMoneyOneWay / (totalGallons * gasPriceHere)) * (mpg * totalGallons);
     locationsArray = [];
     console.log("$" + gasMoneyOneWay +
@@ -124,12 +118,10 @@ function handleResult(result, lat, lon, brng, dist, duration, finalCallback) {
     //	If there is a point here, add it to the list of points you can visit.
     else {
         locationsArray.push(result);
-        console.log("PUSH!");
         totalRetries = 0;
     }
 
     if (locationsArray.length >= totalLocations) {
-        console.log("DONE!");
         finalCallback(locationsArray);
     }
 }
@@ -154,16 +146,11 @@ function getDestination(lat, lon, brng, miles, duration, callback, finalCallback
     lat2 = toDeg(lat2);
     lon2 = toDeg(lon2);
     console.log(lat2 + ", " + lon2);
-    /*gm.reverseGeocode(gm.checkAndConvertPoint([lat2, lon2]), function(err, data) {
-        callback(data.results, toDeg(lat) % 360, toDeg(lon) % 360, toDeg(brng), dist * 6371 / 1.60934, finalCallback);
-    });*/
     distance.get({
             origin: myLocation[0] + "," + myLocation[1],
             destination: lat2 + "," + lon2
         },
         function(err, data) {
-            //if (err) return console.log("Error in getting distance:" + err);
-            //console.log(data);
             if (!err) {
                 if (data.durationValue > duration * 60 * 60) {
                     console.log("Time " + data.durationValue / 3600 + " is longer than " + duration + ". Retrying with distance " + miles + " and angle " + toDeg(brng));
